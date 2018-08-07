@@ -1,8 +1,7 @@
 package main
 
-// BallClock knows how many balls it has to use, and maintains its time tracks
+// BallClock indicates which balls are in which time tracks
 type BallClock struct {
-	numOfBalls  int
 	minuteTrack [4]int
 	fiveTrack   [11]int
 	hourTrack   [11]int
@@ -17,7 +16,6 @@ func newBallClock(numOfBalls int) BallClock {
 	}
 
 	return BallClock{
-		numOfBalls,
 		[4]int{},
 		[11]int{},
 		[11]int{},
@@ -27,4 +25,8 @@ func newBallClock(numOfBalls int) BallClock {
 
 func main() {
 
+}
+
+func (c *BallClock) runForMinutes(minutes int) BallClock {
+	return BallClock{}
 }
