@@ -31,7 +31,7 @@ func main() {
 
 }
 
-func (c *BallClock) runForMinutes(minutes int) BallClock {
+func (c *BallClock) runForMinutes(minutes int) {
 	for i := 0; i < minutes; i++ {
 		ball := c.mainTrack[0]
 		c.mainTrack = c.mainTrack[1:]
@@ -76,6 +76,4 @@ func (c *BallClock) runForMinutes(minutes int) BallClock {
 			c.minuteTrack = append(c.minuteTrack, ball)
 		}
 	}
-
-	return *c
 }
