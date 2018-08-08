@@ -94,4 +94,20 @@ func TestRunTimeFor30Balls(t *testing.T) {
 			t.Errorf("running the clock should have made %v, but instead made %v", want, got)
 		}
 	})
+
+	t.Run("it holds 11 balls in the hourTrack, 11 in the fiveTrack and 4 in the minuteTrack", func(t *testing.T) {
+		clock := newBallClock(30)
+		got := clock.runForMinutes(719)
+		want := BallClock{
+			[]int{29, 21, 7, 27},
+			[]int{11, 10, 20, 1, 8, 9, 3, 24, 16, 14, 30},
+			[]int{6, 12, 17, 4, 15, 23, 22, 2, 26, 18, 28},
+			[]int{25, 5, 19, 13},
+		}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("running the clock should have made %v, but instead made %v", want, got)
+		}
+	})
+
 }
