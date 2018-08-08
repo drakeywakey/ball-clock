@@ -20,15 +20,18 @@ func TestNewBallClock(t *testing.T) {
 func TestRunTimeFor30Balls(t *testing.T) {
 	clock := newBallClock(30)
 
-	got := clock.runForMinutes(1)
-	want := BallClock{
-		[]int{1},
-		[]int{},
-		[]int{},
-		[]int{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
-	}
+	t.Run("it moves 4 balls onto the minute track", func(t *testing.T) {
+		got := clock.runForMinutes(4)
+		want := BallClock{
+			[]int{1, 2, 3, 4},
+			[]int{},
+			[]int{},
+			[]int{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
+		}
 
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("running the clock should have made %v, but instead made %v", want, got)
-	}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("running the clock should have made %v, but instead made %v", want, got)
+		}
+
+	})
 }
