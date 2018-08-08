@@ -1,5 +1,10 @@
 package main
 
+import (
+	"math"
+	"reflect"
+)
+
 // BallClock indicates which balls are in which time tracks
 type BallClock struct {
 	minuteTrack []int
@@ -32,7 +37,17 @@ func main() {
 }
 
 func (c *BallClock) runUntilRepeat() int {
-	return 0
+	init := newBallClock(len(c.mainTrack))
+	minutes := 1
+	runClockOneMinute(c)
+
+	// run until the configuration is back to the start, OR to prevent "minutes" from overflowing, until minutes would be the max int32 value
+	for !reflect.DeepEqual(init, *c) && minutes < math.MaxInt32 {
+		minutes++
+		runClockOneMinute(c)
+	}
+
+	return minutes
 }
 
 func runClockOneMinute(c *BallClock) {

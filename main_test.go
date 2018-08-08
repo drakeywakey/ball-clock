@@ -29,7 +29,13 @@ func TestRepeat(t *testing.T) {
 	})
 
 	t.Run("it should take 378 days (544,320 minutes) for 45 balls to return to original order", func(t *testing.T) {
+		clock := newBallClock(45)
+		got := clock.runUntilRepeat()
+		want := 544320
 
+		if got != want {
+			t.Errorf("45 balls should have taken %d minutes, but instead took %d minutes", want, got)
+		}
 	})
 }
 
