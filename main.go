@@ -36,9 +36,9 @@ func (c *BallClock) runForMinutes(minutes int) BallClock {
 		ball := c.mainTrack[0]
 		c.mainTrack = c.mainTrack[1:]
 
-		if len(c.minuteTrack) == 4 {
+		if len(c.minuteTrack) == minuteCap {
 			c.fiveTrack = append(c.fiveTrack, ball)
-			for i := 3; i >= 0; i-- {
+			for i := minuteCap - 1; i >= 0; i-- {
 				minBall := c.minuteTrack[i]
 				c.minuteTrack = c.minuteTrack[:i]
 				c.mainTrack = append(c.mainTrack, minBall)
