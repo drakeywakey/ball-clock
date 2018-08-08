@@ -52,8 +52,20 @@ func (c *BallClock) runForMinutes(minutes int) BallClock {
 					c.mainTrack = append(c.mainTrack, fiveBall)
 				}
 
-				//add this ball to the hour track
-				c.hourTrack = append(c.hourTrack, ball)
+				if len(c.hourTrack) == hourCap {
+					// move the 11 balls on the hour track back to the main track
+					for i := hourCap - 1; i >= 0; i-- {
+						hourBall := c.hourTrack[i]
+						c.hourTrack = c.hourTrack[:i]
+						c.mainTrack = append(c.mainTrack, hourBall)
+					}
+
+					//and move the ball to the main track
+					c.mainTrack = append(c.mainTrack, ball)
+				} else {
+					//add this ball to the hour track
+					c.hourTrack = append(c.hourTrack, ball)
+				}
 
 			} else {
 				// add this ball to the five track
