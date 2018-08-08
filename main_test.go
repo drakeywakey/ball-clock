@@ -110,4 +110,19 @@ func TestRunTimeFor30Balls(t *testing.T) {
 		}
 	})
 
+	t.Run("it returns all balls to the mainTrack after 12 hours", func(t *testing.T) {
+		clock := newBallClock(30)
+		got := clock.runForMinutes(720)
+		want := BallClock{
+			[]int{},
+			[]int{},
+			[]int{},
+			[]int{5, 19, 13, 27, 7, 21, 29, 30, 14, 16, 24, 3, 9, 8, 1, 20, 10, 11, 28, 18, 26, 2, 22, 23, 15, 4, 17, 12, 6, 25},
+		}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("running the clock should have made %v, but instead made %v", want, got)
+		}
+	})
+
 }
